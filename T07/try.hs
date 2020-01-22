@@ -24,4 +24,8 @@ queensN :: Int -> Spielfeld
 queensN n = head (allQueens n)
 
 allQueens :: Int -> [Spielfeld]
-allQueens n = [sol | sol <- perms [1..n]]
+allQueens n = [sol | sol <- perms [1..n], valid sol]
+
+valid :: Spielfeld -> Bool
+valid [] = True
+valis (x:xs) = valid xs && noDiagonalHit x 1 xs && noDiagonalHit x (-1) xs
